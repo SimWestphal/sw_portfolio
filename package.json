@@ -14,11 +14,13 @@
   "keywords": [
     "sanity"
   ],
+  "//pnpm-builds": "pnpm blockiert Build-Scripts (z.B. esbuilds postinstall) standardmaessig aus Sicherheitsgruenden -> `pnpm run dev` bricht mit ERR_PNPM_IGNORED_BUILDS ab. Freigabe steht in pnpm-workspace.yaml (allowBuilds), NICHT hier: ab pnpm 10+ wird ein pnpm-Feld in package.json ignoriert.",
   "dependencies": {
     "@sanity/vision": "^6.4.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sanity": "^6.4.0",
+    "sanity-plugin-internationalized-array": "^5.1.17",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {
