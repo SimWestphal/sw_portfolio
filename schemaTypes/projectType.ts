@@ -1,13 +1,13 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-export const projects = defineType({
+export const project = defineType({
   type: 'document',
-  name: 'projects',
-  title: 'projects',
+  name: 'project',
+  title: 'project',
   fields: [
-    defineField({type: 'string', name: 'title', title: 'title'}),
+    defineField({type: 'internationalizedArrayString', name: 'name', title: 'name'}),
     defineField({
-      type: 'string',
+      type: 'internationalizedArrayString',
       name: 'shortdescription',
       title: 'shortDescription',
     }),
@@ -44,4 +44,13 @@ export const projects = defineType({
       to: [{type: 'role'}],
     }),
   ],
+  preview: {
+    select: {title: 'name'},
+    prepare({title}) {
+      const text = Array.isArray(title)
+        ? (title.find((t) => t.language === 'de') ?? title[0])?.value
+        : title
+      return {title: text ?? 'Ohne Titel'}
+    },
+  },
 })

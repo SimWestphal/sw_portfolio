@@ -5,7 +5,7 @@ export const skill = defineType({
   name: 'skill',
   title: 'skill',
   fields: [
-    defineField({type: 'string', name: 'title', title: 'title'}),
+    defineField({type: 'internationalizedArrayString', name: 'name', title: 'name'}),
     defineField({
       type: 'reference',
       name: 'category',
@@ -13,4 +13,13 @@ export const skill = defineType({
       to: [{type: 'skillcategory'}],
     }),
   ],
+  preview: {
+    select: {title: 'name'},
+    prepare({title}) {
+      const text = Array.isArray(title)
+        ? (title.find((t) => t.language === 'de') ?? title[0])?.value
+        : title
+      return {title: text ?? 'Ohne Titel'}
+    },
+  },
 })
